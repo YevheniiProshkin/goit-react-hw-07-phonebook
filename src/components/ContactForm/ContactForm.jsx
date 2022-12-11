@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import { useSelector } from 'react-redux';
 import { getContacts } from '../../redux/selector';
 import { ButtonAdd, Form, InputForm, Label } from './ContactForm.styled';
@@ -42,7 +42,9 @@ export const ContactForm = () => {
     } else if (name.trim() === '' || number.trim() === '') {
       Notiflix.Notify.failure("Enter the contact's name and number phone!");
     } else {
-      dispatch(addTask({ name, number }));
+      dispatch(addContact({ name, number }));
+      setName('');
+      setNumber('');
     }
   };
 
@@ -50,9 +52,6 @@ export const ContactForm = () => {
     event.preventDefault();
 
     addContactToList(name, number);
-
-    setName('');
-    setNumber('');
   };
 
   return (
